@@ -1,0 +1,19 @@
+{% include "navbar.html" %}
+<h2>Welcome, {{ request.user.username }}</h2>
+{% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" width="150">
+{% endif %}
+<p>{{ profile.bio }}</p>
+<p><a href="{% url 'edit_profile' %}">Edit Profile</a></p>
+<hr>
+<h3>Education</h3>
+<ul>
+    {% for e in education %}
+        <li>{{ e.degree }} — {{ e.institution }} ({{ e.year }})
+        <!-- option: add delete/update links here -->
+        </li>
+    {% empty %}
+        <li>No education items yet.</li>
+    {% endfor %}
+</ul>
+<p><a href="{% url 'add_education' %}">Add Education</a></p>
